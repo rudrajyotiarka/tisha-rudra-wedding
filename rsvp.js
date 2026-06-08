@@ -3,6 +3,7 @@ const LOCAL_STORAGE_KEY = "tisha-rudra-rsvps";
 const config = window.WISHES_CONFIG || {};
 const overlay = document.getElementById("rsvp-overlay");
 const openBtn = document.getElementById("rsvp-open");
+const openContactBtn = document.getElementById("rsvp-open-contact");
 const closeBtn = document.getElementById("rsvp-close");
 const form = document.getElementById("rsvp-form");
 const statusEl = document.getElementById("rsvp-status");
@@ -88,8 +89,10 @@ async function saveRsvp(name, guestCount, attending) {
   return rsvp;
 }
 
-if (openBtn && overlay && form) {
-  openBtn.addEventListener("click", openModal);
+if (overlay && form) {
+  [openBtn, openContactBtn].forEach((btn) => {
+    if (btn) btn.addEventListener("click", openModal);
+  });
   closeBtn.addEventListener("click", closeModal);
 
   overlay.addEventListener("click", (event) => {

@@ -14,22 +14,22 @@
   </head>
   <body>
     <header class="hero-nav">
-      <a class="brand" href="index.html">T&R</a>
+      <a class="brand" href="#home">T&R</a>
       <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
         <span class="nav-toggle-icon" aria-hidden="true"></span>
       </button>
       <nav class="main-nav">
-        <a href="index.html" aria-current="page">home</a>
-        <a href="story.html">story</a>
-        <a href="place.html">place</a>
-        <a href="wishes.html">wishes</a>
-        <a href="gallery.html">gallery</a>
-        <a href="contact.html">contact</a>
+        <a href="#home" data-section="home">home</a>
+        <a href="#story" data-section="story">story</a>
+        <a href="#place" data-section="place">place</a>
+        <a href="#wishes" data-section="wishes">wishes</a>
+        <a href="#gallery" data-section="gallery">gallery</a>
+        <a href="#contact" data-section="contact">contact</a>
       </nav>
     </header>
 
-    <main class="welcome">
-      <section class="welcome-inner">
+    <section id="home" class="site-section welcome">
+      <div class="welcome-inner">
         <div class="photo-card" aria-label="Couple Photo">
           <img class="left-photo" src="assets/home.PNG" alt="Bride and groom smiling together." />
         </div>
@@ -42,8 +42,210 @@
           </p>
           <button type="button" id="rsvp-open">rsvp</button>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <section id="story" class="site-section story">
+      <div class="story-panel">
+        <div class="story-inner">
+          <div class="story-text">
+            <h1>the biggest party of our lives</h1>
+            <p>
+              Though wise men say only fools rush in, he couldn't help falling in love with her. It was worth
+              being a fool, but she was wise.
+            </p>
+          </div>
+
+          <div class="story-photos">
+            <figure class="story-photo-card story-photo-card--one">
+              <img src="assets/puja.jpg" alt="A favorite moment together." />
+            </figure>
+            <figure class="story-photo-card story-photo-card--two">
+              <img src="assets/Hands.jpg" alt="Another memory we love." />
+            </figure>
+          </div>
+        </div>
+
+        <div class="journal-assets" aria-hidden="true">
+          <div class="journal-slot journal-slot--1">
+            <img src="assets/download__3_-removebg-preview.png" alt="" />
+          </div>
+          <div class="journal-slot journal-slot--2">
+            <img src="assets/download__2_-removebg-preview.png" alt="" />
+          </div>
+          <div class="journal-slot journal-slot--3">
+            <img src="assets/download__1_-removebg-preview.png" alt="" />
+          </div>
+          <div class="journal-slot journal-slot--4">
+            <img src="assets/nature_wallpaper_sticker___Free_Stock_Photos__PNGs__Templates___Mockups___rawpixel-removebg-preview.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="place" class="site-section place">
+      <div class="place-panel">
+        <div class="place-inner">
+          <div class="place-photos">
+            <figure class="place-photo-card place-photo-card--one">
+              <img src="assets/20250109_115448.jpg" alt="The wedding venue." />
+            </figure>
+            <figure class="place-photo-card place-photo-card--two">
+              <img src="assets/20250228_145704.jpg" alt="A glimpse of the celebration space." />
+            </figure>
+          </div>
+
+          <div class="place-details">
+            <h1>when &amp; where</h1>
+
+            <div class="place-info">
+              <p class="place-date">july 10, 2026</p>
+              <p class="place-time">ceremony begins at 4:00 pm</p>
+              <p class="place-venue">venue name</p>
+              <p class="place-address">
+                123 celebration lane<br />
+                city, state 00000
+              </p>
+              <p class="place-note">reception to follow · cocktail attire</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="wishes" class="site-section wishes">
+      <div class="wishes-panel">
+        <h1 class="wishes-title">leave a wish</h1>
+
+        <p class="wishes-notice" id="wishes-notice" hidden></p>
+
+        <div class="wishes-inner">
+          <div class="wishes-write">
+            <h2>write yours</h2>
+            <form id="wish-form" class="wish-form">
+              <label class="wish-label" for="wish-name">your name</label>
+              <input
+                id="wish-name"
+                name="name"
+                type="text"
+                maxlength="80"
+                placeholder="e.g. priya &amp; arjun"
+                required
+                autocomplete="name"
+              />
+
+              <label class="wish-label" for="wish-message">your wish</label>
+              <textarea
+                id="wish-message"
+                name="message"
+                rows="6"
+                maxlength="500"
+                placeholder="share your love, advice, or a sweet memory..."
+                required
+              ></textarea>
+
+              <button type="submit" id="wish-submit">send wish</button>
+              <p class="wish-form-status" id="wish-form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="wishes-display">
+            <h2>from our guests</h2>
+            <div class="wishes-list" id="wishes-list">
+              <p class="wishes-empty">loading wishes...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="site-section gallery">
+      <div class="gallery-panel">
+        <h1 class="gallery-title">share your moments</h1>
+        <p class="gallery-subtitle">upload photos with us and from the wedding</p>
+
+        <p class="gallery-notice" id="gallery-notice" hidden></p>
+
+        <div class="gallery-upload">
+          <h2>add a photo</h2>
+          <form id="gallery-form" class="gallery-form">
+            <div class="gallery-form-row">
+              <div class="gallery-form-field">
+                <label class="gallery-label" for="gallery-name">your name</label>
+                <input
+                  id="gallery-name"
+                  name="name"
+                  type="text"
+                  maxlength="80"
+                  placeholder="e.g. ananya"
+                  required
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="gallery-form-field">
+                <label class="gallery-label" for="gallery-caption">caption (optional)</label>
+                <input
+                  id="gallery-caption"
+                  name="caption"
+                  type="text"
+                  maxlength="120"
+                  placeholder="dance floor magic"
+                />
+              </div>
+            </div>
+
+            <div class="gallery-form-field">
+              <label class="gallery-label" for="gallery-photo">choose a photo</label>
+              <input
+                id="gallery-photo"
+                name="photo"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                required
+              />
+              <p class="gallery-hint">jpg, png, or webp · max 5 mb</p>
+            </div>
+
+            <button type="submit" id="gallery-submit">upload photo</button>
+            <p class="gallery-form-status" id="gallery-form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="gallery-display">
+          <h2>our shared album</h2>
+          <div class="gallery-grid" id="gallery-grid">
+            <p class="gallery-empty">loading photos...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="site-section contact">
+      <div class="contact-panel">
+        <p class="contact-eyebrow">with love,</p>
+
+        <h1 class="contact-names">Tisha<br />&amp; Rudra</h1>
+
+        <div class="contact-details">
+          <p>
+            <a href="mailto:tisha@example.com">tisha@example.com</a>
+          </p>
+          <p>
+            <a href="mailto:rudra@example.com">rudra@example.com</a>
+          </p>
+        </div>
+
+        <p class="contact-closing">
+          we cannot wait to celebrate with you.<br />
+          see you at our wedding.
+        </p>
+
+        <p class="contact-date">july 10, 2026</p>
+
+        <button type="button" class="contact-rsvp-btn" id="rsvp-open-contact">rsvp</button>
+      </div>
+    </section>
 
     <div class="rsvp-overlay" id="rsvp-overlay" hidden>
       <div class="rsvp-modal" role="dialog" aria-labelledby="rsvp-title" aria-modal="true">
@@ -87,6 +289,8 @@
 
     <script src="music.js"></script>
     <script src="wishes-config.js"></script>
+    <script src="wishes.js"></script>
+    <script src="gallery.js"></script>
     <script src="rsvp.js"></script>
     <script src="script.js"></script>
   </body>

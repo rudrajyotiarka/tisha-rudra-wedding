@@ -1,4 +1,4 @@
-const MUSIC_SRC = "assets/music.mp3";
+const MUSIC_SRC = "assets/song.mp3";
 const MUSIC_VOLUME = 0.35;
 const STORAGE_KEY = "wedding-music-state";
 
