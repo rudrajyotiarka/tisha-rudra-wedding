@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tisha & Rudra Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero-nav">
+      <a class="brand" href="index.html">T&R</a>
+      <nav>
+        <a href="index.html" aria-current="page">home</a>
+        <a href="story.html">story</a>
+        <a href="place.html">place</a>
+        <a href="wishes.html">wishes</a>
+        <a href="gallery.html">gallery</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </header>
+
+    <main class="welcome">
+      <section class="welcome-inner">
+        <div class="photo-card" aria-label="Couple Photo">
+          <img class="left-photo" src="assets/home.PNG" alt="Bride and groom smiling together." />
+        </div>
+
+        <div class="intro">
+          <h1>Tisha <br />&amp; Rudra<br />are tying the knot!</h1>
+          <p>
+            Celebrate our union with us and our family on July 10, 2026<br />
+            .
+          </p>
+          <button type="button" id="rsvp-open">rsvp</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="rsvp-overlay" id="rsvp-overlay" hidden>
+      <div class="rsvp-modal" role="dialog" aria-labelledby="rsvp-title" aria-modal="true">
+        <button type="button" class="rsvp-close" id="rsvp-close" aria-label="Close RSVP form">&times;</button>
+        <h2 id="rsvp-title">rsvp</h2>
+        <p class="rsvp-subtitle">let us know you're coming</p>
+
+        <form id="rsvp-form" class="rsvp-form">
+          <label class="rsvp-label" for="rsvp-name">your name(s)</label>
+          <input
+            id="rsvp-name"
+            name="name"
+            type="text"
+            maxlength="120"
+            placeholder="e.g. priya &amp; arjun sharma"
+            required
+            autocomplete="name"
+          />
+
+          <label class="rsvp-label" for="rsvp-guests">number of guests</label>
+          <input
+            id="rsvp-guests"
+            name="guest_count"
+            type="number"
+            min="1"
+            max="10"
+            value="1"
+            required
+          />
+
+          <label class="rsvp-label rsvp-label--checkbox" for="rsvp-attending">
+            <input id="rsvp-attending" name="attending" type="checkbox" checked />
+            we will be there
+          </label>
+
+          <button type="submit" id="rsvp-submit">send rsvp</button>
+          <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="music.js"></script>
+    <script src="wishes-config.js"></script>
+    <script src="rsvp.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

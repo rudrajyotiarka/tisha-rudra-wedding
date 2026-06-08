@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishes — Tisha &amp; Rudra Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero-nav">
+      <a class="brand" href="index.html">T&R</a>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="story.html">story</a>
+        <a href="place.html">place</a>
+        <a href="wishes.html" aria-current="page">wishes</a>
+        <a href="gallery.html">gallery</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </header>
+
+    <main class="wishes">
+      <section class="wishes-panel">
+        <h1 class="wishes-title">leave a wish</h1>
+
+        <p class="wishes-notice" id="wishes-notice" hidden></p>
+
+        <div class="wishes-inner">
+          <div class="wishes-write">
+            <h2>write yours</h2>
+            <form id="wish-form" class="wish-form">
+              <label class="wish-label" for="wish-name">your name</label>
+              <input
+                id="wish-name"
+                name="name"
+                type="text"
+                maxlength="80"
+                placeholder="e.g. priya &amp; arjun"
+                required
+                autocomplete="name"
+              />
+
+              <label class="wish-label" for="wish-message">your wish</label>
+              <textarea
+                id="wish-message"
+                name="message"
+                rows="6"
+                maxlength="500"
+                placeholder="share your love, advice, or a sweet memory..."
+                required
+              ></textarea>
+
+              <button type="submit" id="wish-submit">send wish</button>
+              <p class="wish-form-status" id="wish-form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="wishes-display">
+            <h2>from our guests</h2>
+            <div class="wishes-list" id="wishes-list">
+              <p class="wishes-empty">loading wishes...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="music.js"></script>
+    <script src="wishes-config.js"></script>
+    <script src="wishes.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
