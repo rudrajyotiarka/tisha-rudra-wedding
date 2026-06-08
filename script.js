@@ -154,11 +154,14 @@ function initMobileNav() {
   const closeMenu = () => {
     header.classList.remove("nav-open");
     btn.setAttribute("aria-expanded", "false");
+    nav.style.display = "none";
   };
 
   btn.addEventListener("click", () => {
     const open = header.classList.toggle("nav-open");
     btn.setAttribute("aria-expanded", String(open));
+    // Inline style keeps the toggle reliable even if other CSS rules compete.
+    nav.style.display = open ? "flex" : "none";
   });
 
   nav.querySelectorAll("a").forEach((link) => {
