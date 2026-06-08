@@ -147,28 +147,18 @@ function initPageArrows() {
 
 function initMobileNav() {
   const header = document.querySelector(".hero-nav");
-  const nav = header?.querySelector("nav");
-  if (!header || !nav) return;
-
-  const btn = document.createElement("button");
-  btn.className = "nav-toggle";
-  btn.type = "button";
-  btn.setAttribute("aria-label", "Toggle menu");
-  btn.setAttribute("aria-expanded", "false");
-  btn.textContent = "menu";
-
-  header.insertBefore(btn, nav);
+  const nav = header?.querySelector(".main-nav");
+  const btn = header?.querySelector(".nav-toggle");
+  if (!header || !nav || !btn) return;
 
   const closeMenu = () => {
     header.classList.remove("nav-open");
     btn.setAttribute("aria-expanded", "false");
-    btn.textContent = "menu";
   };
 
   btn.addEventListener("click", () => {
     const open = header.classList.toggle("nav-open");
     btn.setAttribute("aria-expanded", String(open));
-    btn.textContent = open ? "close" : "menu";
   });
 
   nav.querySelectorAll("a").forEach((link) => {
