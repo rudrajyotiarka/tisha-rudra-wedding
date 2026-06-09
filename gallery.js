@@ -1,3 +1,4 @@
+(function () {
 const LOCAL_STORAGE_KEY = "tisha-rudra-gallery";
 const BUCKET = "gallery";
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -262,3 +263,4 @@ if (form && gridEl) {
     }
   });
 }
+})();

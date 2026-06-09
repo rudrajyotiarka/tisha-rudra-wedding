@@ -1,3 +1,4 @@
+(function () {
 const LOCAL_STORAGE_KEY = "tisha-rudra-wishes";
 
 const config = window.WISHES_CONFIG || {};
@@ -177,3 +178,4 @@ if (form && listEl) {
     }
   });
 }
+})();

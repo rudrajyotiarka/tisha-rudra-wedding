@@ -1,3 +1,4 @@
+(function () {
 const LOCAL_STORAGE_KEY = "tisha-rudra-rsvps";
 
 const config = window.WISHES_CONFIG || {};
@@ -170,3 +171,4 @@ function initRsvp() {
 }
 
 initRsvp();
+})();
