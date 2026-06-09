@@ -40,7 +40,7 @@
             Celebrate our union with us and our family on July 10, 2026<br />
             .
           </p>
-          <button type="button" id="rsvp-open">rsvp</button>
+          <button type="button" id="rsvp-open" data-rsvp-open>rsvp</button>
         </div>
       </div>
     </section>
@@ -243,11 +243,11 @@
 
         <p class="contact-date">july 10, 2026</p>
 
-        <button type="button" class="contact-rsvp-btn" id="rsvp-open-contact">rsvp</button>
+        <button type="button" class="contact-rsvp-btn" id="rsvp-open-contact" data-rsvp-open>rsvp</button>
       </div>
     </section>
 
-    <div class="rsvp-overlay" id="rsvp-overlay" hidden>
+    <div class="rsvp-overlay" id="rsvp-overlay" aria-hidden="true">
       <div class="rsvp-modal" role="dialog" aria-labelledby="rsvp-title" aria-modal="true">
         <button type="button" class="rsvp-close" id="rsvp-close" aria-label="Close RSVP form">&times;</button>
         <h2 id="rsvp-title">rsvp</h2>
@@ -257,7 +257,7 @@
           <label class="rsvp-label" for="rsvp-name">your name(s)</label>
           <input
             id="rsvp-name"
-            name="name"
+            name="guest_name"
             type="text"
             maxlength="120"
             placeholder="e.g. priya &amp; arjun sharma"

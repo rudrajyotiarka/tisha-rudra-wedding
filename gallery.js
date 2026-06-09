@@ -96,7 +96,7 @@ function renderPhotos(photos) {
     .join("");
 
   gridEl.querySelectorAll(".reveal-item").forEach((card, index) => {
-    card.style.transitionDelay = `${50 + index * 60}ms`;
+    card.style.transitionDelay = `${220 + index * 100}ms`;
   });
   window.observeRevealElements?.(gridEl);
 }

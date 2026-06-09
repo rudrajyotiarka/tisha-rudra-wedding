@@ -76,7 +76,7 @@ function renderWishes(wishes) {
     .join("");
 
   listEl.querySelectorAll(".reveal-item").forEach((card, index) => {
-    card.style.transitionDelay = `${60 + index * 70}ms`;
+    card.style.transitionDelay = `${220 + index * 110}ms`;
   });
   window.observeRevealElements?.(listEl);
 }

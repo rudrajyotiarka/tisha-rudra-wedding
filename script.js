@@ -1,5 +1,5 @@
-const STAGGER_MS = 90;
-const STAGGER_START_MS = 120;
+const STAGGER_MS = 320;
+const STAGGER_START_MS = 400;
 
 const SITE_SECTIONS = [
   { id: "home", label: "home" },
@@ -57,7 +57,7 @@ function applyStagger(container) {
   if (!container || prefersReducedMotion) return;
 
   [...container.children].forEach((child, index) => {
-    child.style.animationDelay = `${STAGGER_START_MS + index * STAGGER_MS}ms`;
+    child.style.setProperty("--stagger-delay", `${STAGGER_START_MS + index * STAGGER_MS}ms`);
   });
 }
 
@@ -67,25 +67,34 @@ function revealElement(element) {
   revealObserver?.unobserve(element);
 }
 
+const REVEAL_BLOCKS = [
+  ".story-panel",
+  ".place-panel",
+  ".wishes-panel",
+  ".gallery-panel",
+  ".contact-panel",
+];
+
 function observeRevealElements(root = document) {
   if (!revealObserver) return;
 
-  root.querySelectorAll(".stagger-in:not(.is-revealed), .reveal-item:not(.is-revealed)").forEach((element) => {
+  REVEAL_BLOCKS.forEach((selector) => {
+    root.querySelectorAll(`${selector}:not(.is-revealed)`).forEach((element) => {
+      revealObserver.observe(element);
+    });
+  });
+
+  root.querySelectorAll(".reveal-item:not(.is-revealed)").forEach((element) => {
     revealObserver.observe(element);
   });
 }
 
 function initStaggerContainers() {
   const staggerContainers = [
-    ".welcome-inner",
-    ".story-panel",
-    ".place-panel",
-    ".wishes-panel",
-    ".gallery-panel",
-    ".contact-panel",
     ".story-inner",
     ".place-inner",
     ".wishes-inner",
+    ".gallery-upload",
     ".gallery-display",
   ];
 
@@ -96,16 +105,18 @@ function initStaggerContainers() {
     });
   });
 
-  document.querySelectorAll(".story-photo-card, .place-photo-card").forEach((card, index) => {
-    card.classList.add("reveal-item");
-    card.style.transitionDelay = `${140 + index * 160}ms`;
+  document.querySelectorAll(".story-photos, .place-photos").forEach((container) => {
+    container.querySelectorAll(".story-photo-card, .place-photo-card").forEach((card, index) => {
+      card.classList.add("reveal-item");
+      card.style.setProperty("--reveal-delay", `${480 + index * 240}ms`);
+    });
   });
 }
 
 function initScrollReveal() {
   if (prefersReducedMotion) {
-    document.querySelectorAll(".stagger-in, .reveal-item, .site-section").forEach((element) => {
-      element.classList.add("is-revealed", "section-in-view");
+    document.querySelectorAll(".story-panel, .place-panel, .wishes-panel, .gallery-panel, .contact-panel, .reveal-item").forEach((element) => {
+      element.classList.add("is-revealed");
     });
     return;
   }
@@ -119,28 +130,12 @@ function initScrollReveal() {
       });
     },
     {
-      rootMargin: "0px 0px -12% 0px",
-      threshold: 0.12,
+      rootMargin: "0px 0px -8% 0px",
+      threshold: 0.18,
     }
   );
 
   observeRevealElements();
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("section-in-view");
-        }
-      });
-    },
-    {
-      rootMargin: "-15% 0px -40% 0px",
-      threshold: 0.08,
-    }
-  );
-
-  getSectionElements().forEach((section) => sectionObserver.observe(section));
 }
 
 window.observeRevealElements = observeRevealElements;
@@ -290,13 +285,9 @@ function initPageLoad() {
   }
 
   requestAnimationFrame(() => {
-    document.body.classList.add("page-loaded");
-
-    const home = document.getElementById("home");
-    if (home) {
-      home.classList.add("section-in-view");
-      home.querySelectorAll(".stagger-in, .reveal-item").forEach(revealElement);
-    }
+    requestAnimationFrame(() => {
+      document.body.classList.add("page-loaded");
+    });
   });
 }
 

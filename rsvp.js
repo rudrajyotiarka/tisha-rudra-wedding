@@ -1,13 +1,19 @@
 const LOCAL_STORAGE_KEY = "tisha-rudra-rsvps";
 
 const config = window.WISHES_CONFIG || {};
-const overlay = document.getElementById("rsvp-overlay");
-const openBtn = document.getElementById("rsvp-open");
-const openContactBtn = document.getElementById("rsvp-open-contact");
-const closeBtn = document.getElementById("rsvp-close");
-const form = document.getElementById("rsvp-form");
-const statusEl = document.getElementById("rsvp-status");
-const submitBtn = document.getElementById("rsvp-submit");
+
+function getRsvpElements() {
+  return {
+    overlay: document.getElementById("rsvp-overlay"),
+    form: document.getElementById("rsvp-form"),
+    closeBtn: document.getElementById("rsvp-close"),
+    statusEl: document.getElementById("rsvp-status"),
+    submitBtn: document.getElementById("rsvp-submit"),
+    nameInput: document.getElementById("rsvp-name"),
+    guestsInput: document.getElementById("rsvp-guests"),
+    attendingInput: document.getElementById("rsvp-attending"),
+  };
+}
 
 function isSupabaseConfigured() {
   const { supabaseUrl, supabaseAnonKey } = config;
@@ -40,16 +46,25 @@ function writeLocalRsVps(rsVps) {
 }
 
 function openModal() {
+  const { overlay, statusEl, nameInput } = getRsvpElements();
   if (!overlay) return;
-  overlay.hidden = false;
+
+  overlay.classList.add("is-open");
+  overlay.setAttribute("aria-hidden", "false");
   document.body.classList.add("rsvp-open");
-  statusEl.textContent = "";
-  form.name.focus();
+  if (statusEl) statusEl.textContent = "";
+
+  window.setTimeout(() => {
+    nameInput?.focus({ preventScroll: true });
+  }, 0);
 }
 
 function closeModal() {
+  const { overlay } = getRsvpElements();
   if (!overlay) return;
-  overlay.hidden = true;
+
+  overlay.classList.remove("is-open");
+  overlay.setAttribute("aria-hidden", "true");
   document.body.classList.remove("rsvp-open");
 }
 
@@ -89,48 +104,69 @@ async function saveRsvp(name, guestCount, attending) {
   return rsvp;
 }
 
-if (overlay && form) {
-  [openBtn, openContactBtn].forEach((btn) => {
-    if (btn) btn.addEventListener("click", openModal);
+function bindOpenButtons() {
+  document.querySelectorAll("[data-rsvp-open]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openModal();
+    });
   });
-  closeBtn.addEventListener("click", closeModal);
+}
+
+function initRsvp() {
+  const { overlay, form, closeBtn, statusEl, submitBtn, nameInput, guestsInput, attendingInput } =
+    getRsvpElements();
+
+  if (!overlay || !form) return;
+
+  bindOpenButtons();
+
+  closeBtn?.addEventListener("click", (event) => {
+    event.preventDefault();
+    closeModal();
+  });
 
   overlay.addEventListener("click", (event) => {
     if (event.target === overlay) closeModal();
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !overlay.hidden) closeModal();
+    if (event.key === "Escape" && overlay.classList.contains("is-open")) closeModal();
   });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const name = form.name.value.trim();
-    const guestCount = Number(form.guest_count.value);
-    const attending = form.attending.checked;
+    const name = nameInput?.value.trim() ?? "";
+    const guestCount = Number(guestsInput?.value);
+    const attending = attendingInput?.checked ?? true;
 
     if (!name || guestCount < 1) return;
 
-    submitBtn.disabled = true;
-    statusEl.textContent = "sending...";
+    if (submitBtn) submitBtn.disabled = true;
+    if (statusEl) statusEl.textContent = "sending...";
 
     try {
       await saveRsvp(name, guestCount, attending);
       form.reset();
-      form.guest_count.value = "1";
-      form.attending.checked = true;
-      statusEl.textContent = attending
-        ? "thank you — we can't wait to see you."
-        : "thank you — we'll miss you.";
+      if (guestsInput) guestsInput.value = "1";
+      if (attendingInput) attendingInput.checked = true;
+      if (statusEl) {
+        statusEl.textContent = attending
+          ? "thank you — we can't wait to see you."
+          : "thank you — we'll miss you.";
 
-      if (!isSupabaseConfigured()) {
-        statusEl.textContent += " (saved locally for demo only)";
+        if (!isSupabaseConfigured()) {
+          statusEl.textContent += " (saved locally for demo only)";
+        }
       }
     } catch {
-      statusEl.textContent = "something went wrong. please try again.";
+      if (statusEl) statusEl.textContent = "something went wrong. please try again.";
     } finally {
-      submitBtn.disabled = false;
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 }
+
+initRsvp();
