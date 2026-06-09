@@ -82,7 +82,7 @@ function renderPhotos(photos) {
       const caption = photo.caption ? `<p class="gallery-card-caption">${escapeHtml(photo.caption)}</p>` : "";
 
       return `
-        <figure class="gallery-card" style="--tilt: ${tilt}">
+        <figure class="gallery-card reveal-item" style="--tilt: ${tilt}">
           <div class="gallery-card-frame">
             <img src="${escapeHtml(photo.url)}" alt="Photo shared by ${escapeHtml(photo.name)}" loading="lazy" />
           </div>
@@ -94,6 +94,11 @@ function renderPhotos(photos) {
       `;
     })
     .join("");
+
+  gridEl.querySelectorAll(".reveal-item").forEach((card, index) => {
+    card.style.transitionDelay = `${50 + index * 60}ms`;
+  });
+  window.observeRevealElements?.(gridEl);
 }
 
 async function fetchPhotos() {

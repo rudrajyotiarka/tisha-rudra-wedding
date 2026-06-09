@@ -64,7 +64,7 @@ function renderWishes(wishes) {
   listEl.innerHTML = wishes
     .map(
       (wish) => `
-        <article class="wish-card">
+        <article class="wish-card reveal-item">
           <p class="wish-card-message">${escapeHtml(wish.message)}</p>
           <footer class="wish-card-meta">
             <span class="wish-card-name">${escapeHtml(wish.name)}</span>
@@ -74,6 +74,11 @@ function renderWishes(wishes) {
       `
     )
     .join("");
+
+  listEl.querySelectorAll(".reveal-item").forEach((card, index) => {
+    card.style.transitionDelay = `${60 + index * 70}ms`;
+  });
+  window.observeRevealElements?.(listEl);
 }
 
 async function fetchWishes() {

@@ -51,6 +51,8 @@ function setActiveNav(sectionId) {
   });
 }
 
+let revealObserver;
+
 function applyStagger(container) {
   if (!container || prefersReducedMotion) return;
 
@@ -59,7 +61,21 @@ function applyStagger(container) {
   });
 }
 
-function initStaggerAnimations() {
+function revealElement(element) {
+  if (!element || element.classList.contains("is-revealed")) return;
+  element.classList.add("is-revealed");
+  revealObserver?.unobserve(element);
+}
+
+function observeRevealElements(root = document) {
+  if (!revealObserver) return;
+
+  root.querySelectorAll(".stagger-in:not(.is-revealed), .reveal-item:not(.is-revealed)").forEach((element) => {
+    revealObserver.observe(element);
+  });
+}
+
+function initStaggerContainers() {
   const staggerContainers = [
     ".welcome-inner",
     ".story-panel",
@@ -70,6 +86,7 @@ function initStaggerAnimations() {
     ".story-inner",
     ".place-inner",
     ".wishes-inner",
+    ".gallery-display",
   ];
 
   staggerContainers.forEach((selector) => {
@@ -78,7 +95,55 @@ function initStaggerAnimations() {
       applyStagger(container);
     });
   });
+
+  document.querySelectorAll(".story-photo-card, .place-photo-card").forEach((card, index) => {
+    card.classList.add("reveal-item");
+    card.style.transitionDelay = `${140 + index * 160}ms`;
+  });
 }
+
+function initScrollReveal() {
+  if (prefersReducedMotion) {
+    document.querySelectorAll(".stagger-in, .reveal-item, .site-section").forEach((element) => {
+      element.classList.add("is-revealed", "section-in-view");
+    });
+    return;
+  }
+
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          revealElement(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.12,
+    }
+  );
+
+  observeRevealElements();
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("section-in-view");
+        }
+      });
+    },
+    {
+      rootMargin: "-15% 0px -40% 0px",
+      threshold: 0.08,
+    }
+  );
+
+  getSectionElements().forEach((section) => sectionObserver.observe(section));
+}
+
+window.observeRevealElements = observeRevealElements;
 
 function initSectionNav() {
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -226,6 +291,12 @@ function initPageLoad() {
 
   requestAnimationFrame(() => {
     document.body.classList.add("page-loaded");
+
+    const home = document.getElementById("home");
+    if (home) {
+      home.classList.add("section-in-view");
+      home.querySelectorAll(".stagger-in, .reveal-item").forEach(revealElement);
+    }
   });
 }
 
@@ -233,5 +304,6 @@ initMobileNav();
 initSectionNav();
 initScrollSpy();
 initPageArrows();
+initStaggerContainers();
+initScrollReveal();
 initPageLoad();
-initStaggerAnimations();
