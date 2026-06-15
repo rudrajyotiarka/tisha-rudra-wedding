@@ -251,6 +251,78 @@ function initPageArrows() {
   });
 }
 
+function initStoryPages() {
+  const storySection = document.getElementById("story");
+  if (!storySection) return;
+
+  const pages = [...storySection.querySelectorAll(".story-page")];
+  const buttons = [...storySection.querySelectorAll(".story-pagination-btn")];
+  const prevButton = document.getElementById("story-prev");
+  const nextButton = document.getElementById("story-next");
+  const ctaButton = document.getElementById("story-cta-next");
+  const currentPageLabel = document.getElementById("story-current-page");
+  if (pages.length < 2) return;
+
+  let currentPage = 0;
+
+  function revealStoryPage(page) {
+    const panel = page.querySelector(".story-panel");
+    if (!panel) return;
+
+    revealElement(panel);
+
+    page.querySelectorAll(".reveal-item").forEach((item) => {
+      revealElement(item);
+    });
+
+    observeRevealElements(page);
+  }
+
+  function updateStoryNav() {
+    const isFirstPage = currentPage === 0;
+    const isLastPage = currentPage === pages.length - 1;
+
+    if (prevButton) prevButton.disabled = isFirstPage;
+    if (nextButton) nextButton.disabled = isLastPage;
+    if (currentPageLabel) currentPageLabel.textContent = String(currentPage + 1);
+    if (ctaButton) ctaButton.classList.toggle("is-hidden", !isFirstPage);
+  }
+
+  function goToPage(index) {
+    if (index < 0 || index >= pages.length || index === currentPage) return;
+
+    currentPage = index;
+
+    pages.forEach((page, pageIndex) => {
+      const isActive = pageIndex === index;
+      page.classList.toggle("is-active", isActive);
+      page.setAttribute("aria-hidden", String(!isActive));
+    });
+
+    buttons.forEach((button, buttonIndex) => {
+      const isActive = buttonIndex === index;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-current", String(isActive));
+    });
+
+    updateStoryNav();
+    revealStoryPage(pages[index]);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = Number(button.dataset.storyTarget);
+      if (!Number.isNaN(target)) goToPage(target);
+    });
+  });
+
+  prevButton?.addEventListener("click", () => goToPage(currentPage - 1));
+  nextButton?.addEventListener("click", () => goToPage(currentPage + 1));
+  ctaButton?.addEventListener("click", () => goToPage(currentPage + 1));
+
+  updateStoryNav();
+}
+
 function initMobileNav() {
   const header = document.querySelector(".hero-nav");
   const nav = header?.querySelector(".main-nav");
@@ -297,4 +369,5 @@ initScrollSpy();
 initPageArrows();
 initStaggerContainers();
 initScrollReveal();
+initStoryPages();
 initPageLoad();

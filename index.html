@@ -46,41 +46,103 @@
     </section>
 
     <section id="story" class="site-section story">
-      <div class="story-panel">
-        <div class="story-inner">
-          <div class="story-text">
-            <h1>the biggest party of our lives</h1>
-            <p>
-              Though wise men say only fools rush in, he couldn't help falling in love with her. It was worth
-              being a fool, but she was wise.
-            </p>
-          </div>
+      <div class="story-shell">
+        <button
+          type="button"
+          class="story-arrow story-arrow--prev"
+          id="story-prev"
+          aria-label="Previous story page"
+          disabled
+        >
+          <span class="story-arrow-icon" aria-hidden="true">‹</span>
+          <span class="story-arrow-label">back</span>
+        </button>
 
-          <div class="story-photos">
-            <figure class="story-photo-card story-photo-card--one">
-              <img src="assets/puja.jpg" alt="A favorite moment together." />
-            </figure>
-            <figure class="story-photo-card story-photo-card--two">
-              <img src="assets/Hands.jpg" alt="Another memory we love." />
-            </figure>
+        <div class="story-pages">
+        <div class="story-page is-active" data-story-page="0">
+          <div class="story-panel">
+            <div class="story-inner">
+              <div class="story-text">
+                <h1>the biggest party of our lives</h1>
+                <p>
+                  Though wise men say only fools rush in, he couldn't help falling in love with her. It was worth
+                  being a fool, but she was wise.
+                </p>
+              </div>
+
+              <div class="story-photos">
+                <figure class="story-photo-card story-photo-card--one">
+                  <img src="assets/puja.jpg" alt="A favorite moment together." />
+                </figure>
+                <figure class="story-photo-card story-photo-card--two">
+                  <img src="assets/Hands.jpg" alt="Another memory we love." />
+                </figure>
+              </div>
+            </div>
+
+            <div class="journal-assets" aria-hidden="true">
+              <div class="journal-slot journal-slot--1">
+                <img src="assets/download__3_-removebg-preview.png" alt="" />
+              </div>
+              <div class="journal-slot journal-slot--2">
+                <img src="assets/download__2_-removebg-preview.png" alt="" />
+              </div>
+              <div class="journal-slot journal-slot--3">
+                <img src="assets/download__1_-removebg-preview.png" alt="" />
+              </div>
+              <div class="journal-slot journal-slot--4">
+                <img src="assets/nature_wallpaper_sticker___Free_Stock_Photos__PNGs__Templates___Mockups___rawpixel-removebg-preview.png" alt="" />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="journal-assets" aria-hidden="true">
-          <div class="journal-slot journal-slot--1">
-            <img src="assets/download__3_-removebg-preview.png" alt="" />
-          </div>
-          <div class="journal-slot journal-slot--2">
-            <img src="assets/download__2_-removebg-preview.png" alt="" />
-          </div>
-          <div class="journal-slot journal-slot--3">
-            <img src="assets/download__1_-removebg-preview.png" alt="" />
-          </div>
-          <div class="journal-slot journal-slot--4">
-            <img src="assets/nature_wallpaper_sticker___Free_Stock_Photos__PNGs__Templates___Mockups___rawpixel-removebg-preview.png" alt="" />
+        <div class="story-page" data-story-page="1" aria-hidden="true">
+          <div class="story-panel">
+            <div class="story-inner story-inner--flipped">
+              <div class="story-photos">
+                <figure class="story-photo-card story-photo-card--one">
+                  <img src="assets/Selfies.jpg" alt="Laughing together on an adventure." />
+                </figure>
+                <figure class="story-photo-card story-photo-card--two">
+                  <img src="assets/_MG_7062.jpg" alt="A quiet moment we treasure." />
+                </figure>
+              </div>
+
+              <div class="story-text story-text-box">
+                <h1>and then we said yes</h1>
+                <p>
+                  From late-night talks to sunrise plans, every chapter led us here. We cannot wait to write the
+                  next one with all of you beside us.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+        </div>
+
+        <button type="button" class="story-arrow story-arrow--next" id="story-next" aria-label="Next story page">
+          <span class="story-arrow-icon" aria-hidden="true">›</span>
+          <span class="story-arrow-label">next</span>
+        </button>
       </div>
+
+      <nav class="story-pagination" aria-label="Story pages">
+        <p class="story-page-status" aria-live="polite">
+          page <span id="story-current-page">1</span> of 2
+        </p>
+
+        <div class="story-pagination-dots">
+          <button type="button" class="story-pagination-btn is-active" data-story-target="0" aria-current="true">
+            <span class="visually-hidden">Story page 1</span>
+          </button>
+          <button type="button" class="story-pagination-btn" data-story-target="1" aria-current="false">
+            <span class="visually-hidden">Story page 2</span>
+          </button>
+        </div>
+
+        <button type="button" class="story-cta" id="story-cta-next">keep reading →</button>
+      </nav>
     </section>
 
     <section id="place" class="site-section place">
