@@ -254,6 +254,17 @@ nav {
   line-height: 1.35;
 }
 
+.intro p.intro-music-hint {
+  font-family: "Special Elite", monospace;
+  margin: 3rem 0 0;
+  font-size: clamp(1rem, 1vw, 0.78rem);
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  color: #8f7a7b;
+  opacity: 0.65;
+  font-style: italic;
+}
+
 .intro button,
 .contact-rsvp-btn {
   margin-top: 2rem;
@@ -2056,6 +2067,7 @@ body.page-loaded .hero-nav {
 .welcome .photo-card,
 .welcome .intro h1,
 .welcome .intro p,
+.welcome .intro-music-hint,
 .welcome .intro button {
   opacity: 0;
 }
@@ -2073,7 +2085,11 @@ body.page-loaded .welcome .intro p {
 }
 
 body.page-loaded .welcome .intro button {
-  animation: heroReveal 0.95s var(--ease-out) 1.65s forwards;
+  animation: heroReveal 0.95s var(--ease-out) 1.45s forwards;
+}
+
+body.page-loaded .welcome .intro-music-hint {
+  animation: heroReveal 0.95s var(--ease-out) 1.75s forwards;
 }
 
 .welcome-inner {
@@ -2291,6 +2307,7 @@ body.page-loaded .welcome .intro button {
   .welcome .photo-card,
   .welcome .intro h1,
   .welcome .intro p,
+  .welcome .intro-music-hint,
   .welcome .intro button,
   .story-panel,
   .place-panel,
