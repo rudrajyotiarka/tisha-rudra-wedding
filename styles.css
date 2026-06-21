@@ -928,10 +928,10 @@ nav a[aria-current="page"] {
 }
 
 .journal-slot--bottom-center {
-  bottom: 2%;
+  bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(350px, 58vw);
+  width: min(200px, 50vw);
 }
 
 @media (max-width: 820px) {
